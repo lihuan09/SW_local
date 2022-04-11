@@ -8,7 +8,7 @@ blosum62.txt is provided as the score matrix for match and mismatch
 
 The default gap penalities are as follows: openning gap = -2, extension gap = -1
 
-There are two sample input and output files 
+There are two sample input and output files, additionally, one input text file and one output text file by running the algo
 
 Please follow the instructions to run the program
 
