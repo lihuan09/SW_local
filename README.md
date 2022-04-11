@@ -13,5 +13,6 @@ There are two sample input and output files
 Please follow the instructions to run the program
 
 Usage: python hw1.py -i <input file> -s <score file>
+
 Example: python hw1.py -i input.txt -s blosum62.txt
   
