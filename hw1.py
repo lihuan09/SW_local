@@ -1,7 +1,7 @@
 #!/usr/bin/python
 __author__ = "Huan Li"
 __email__ = "huan.li@yale.edu"
-__copyright__ = "Copyright 2021"
+__copyright__ = "Copyright 2022"
 __license__ = "GPL"
 __version__ = "1.0.0"
 
@@ -33,11 +33,7 @@ def runSW(inputFile, scoreFile, openGap, extGap):
     for i in range(len(scoreFile_list)):
         scoreFile_list[i] = scoreFile_list[i].split(" ")
     for i in range(len(scoreFile_list)):
-        while True:
-            try:
-                scoreFile_list[i].remove("")
-            except ValueError:
-                break
+        scoreFile_list[i]= list(filter(('').__ne__, scoreFile_list[i]))
     scoreFile_mat = []
     for line in range(len(scoreFile_list)):
         if line == 0:
@@ -45,6 +41,7 @@ def runSW(inputFile, scoreFile, openGap, extGap):
         else:
             item = scoreFile_list[line][1:]
         scoreFile_mat.append(item)
+    
     # get the scores for corresponding characters
     score_list = scoreFile_mat[0]
     scoreFile_mat = scoreFile_mat[1:(len(scoreFile_list)-2)]
@@ -114,17 +111,17 @@ def runSW(inputFile, scoreFile, openGap, extGap):
     if n == 0 or m == 0:
         if m >= n:
             start_a=a[0:(m-n)]
-            start_b=' '*(n-m)
+            start_b=(n-m)*' '
         elif m < n:
             start_b=b[0:(n-m)]
-            start_a=' '*(m-n)
+            start_a=(m-n)*' '
     else:
         if m >= n:
             start_a=a[0:(m)]
-            start_b=' '*(m-n) + b[0:n]
+            start_b=(m-n)*' ' + b[0:n]
         elif m < n:
             start_b=b[0:(n)]
-            start_a=' '*(n-m) + a[0:m]
+            start_a=(n-m)*' ' + a[0:m]
     
     # consider the ending edge          
     ending_a = len(a) - max_i
@@ -132,12 +129,12 @@ def runSW(inputFile, scoreFile, openGap, extGap):
     if ending_a==0 and ending_b==0:
         end_a = ""
         end_b = ""
+    elif ending_a==0:
+        end_a = ending_b*' '
+        end_b = b[-ending_b:]
     elif ending_b==0:
         end_a = a[-ending_a:]
-        end_b = ' '*ending_a
-    elif ending_a==0:
-        end_a = ' '*ending_b
-        end_b = b[-ending_b:]
+        end_b = ending_a*' '
     else:
         end_a = a[-ending_a:]
         end_b = b[-ending_b:]
